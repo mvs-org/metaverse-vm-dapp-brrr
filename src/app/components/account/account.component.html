@@ -1,0 +1,16 @@
+<div *ngIf="metaversevmService.connected$|async; else connectButton">
+  <p>
+    The Metaverse Counter dApp is connected to your browser extension
+  </p>
+</div>
+<ng-template #connectButton>
+  <p>
+    <mat-card>
+      Please connect to your MetaverseVM browser extension. You can download the latest version from your browsers
+      extension store as well as from <a
+        href="https://github.com/mvs-org/metaverse-vm-extension/releases">https://github.com/mvs-org/metaverse-vm-extension/releases</a>
+    </mat-card>
+
+  </p>
+  <button id="connect-button" mat-raised-button color="warn" (click)="connect()">Connect to Metaverse</button>
+</ng-template>

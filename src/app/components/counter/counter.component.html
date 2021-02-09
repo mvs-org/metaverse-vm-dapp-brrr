@@ -1,0 +1,7 @@
+<app-counter-indicator [jumping]="animateIndicator"></app-counter-indicator>
+
+<div *ngIf="(counterService.value$|async)!==undefined">
+  <p align="center"><b>{{counterService.value$|async}}</b> have raised their hand for decentralization</p>
+  <button id="increment-button"  mat-raised-button color="primary" (click)="inc()">Click here to raise your hand</button>
+</div>
+<!-- <button (click)="deploy()">deploy</button> -->

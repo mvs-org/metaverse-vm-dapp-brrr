@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MetaversevmService } from './services/metaversevm.service'
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'metaversevm-dapp-counter';
+
+  constructor(public metaversevmService: MetaversevmService){
+  }
 }
