@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { BehaviorSubject, interval, Subject } from 'rxjs'
+import { BehaviorSubject, interval, } from 'rxjs'
 import { MetaversevmService } from './metaversevm.service'
 const abi = require('../../assets/counter.abi.json')
 
