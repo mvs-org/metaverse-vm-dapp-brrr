@@ -6,7 +6,7 @@
 }
 
 .jump {
-  animation: jump 1.2s;
+  animation: jump 1s;
 }
 
 @keyframes jump {
@@ -15,7 +15,7 @@
   }
 
   50% {
-    transform: translateY(-80px);
+    transform: translateY(-20px);
   }
 
   100% {
