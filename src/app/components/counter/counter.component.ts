@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { CounterService } from '../../services/counter.service'
-import { MetaversevmService } from '../../services/metaversevm.service'
+import { MetaversevmService, TransactionReceipt } from '../../services/metaversevm.service'
 
 @Component({
   selector: 'app-counter',
@@ -11,6 +11,7 @@ import { MetaversevmService } from '../../services/metaversevm.service'
 export class CounterComponent implements OnInit {
 
   animateIndicator = false
+  pendingTransactions = 0
 
   constructor(
     public counterService: CounterService,
@@ -22,7 +23,7 @@ export class CounterComponent implements OnInit {
         this.animateIndicator = true
         setInterval(() => {
           this.animateIndicator = false
-        }, 2000)
+        }, 1000)
       }
     })
   }
@@ -32,7 +33,7 @@ export class CounterComponent implements OnInit {
 
   inc() {
     this.counterService.increment()
-      .on('sending', () => {
+      .on('sent', () => {
         this.snackbar.open(
           `Transaction created. Please confirm on it on your browser extension.`,
           'Info',
@@ -40,23 +41,36 @@ export class CounterComponent implements OnInit {
             duration: 2000,
           }
         )
-        console.log('sending transaction')
+        console.log('new transaction created')
       })
-      .on('sent', () => {
-        console.log('sent transaction')
+      .on('transactionHash', (txid: string) => {
+        console.log('transaction hash:', txid)
+        this.pendingTransactions++
       })
-      .on('transactionHash', (hash: string) => {
-        console.log('transaction hash:', hash)
-      })
-
       .on('receipt', (receipt: any) => {
-        this.snackbar.open(
-          `Transaction confirmed`,
-          'Success'
-        )
         console.log('transaction receipt', receipt)
       })
+      .then((transaction: TransactionReceipt) => {
+        this.snackbar.open(
+          `Transaction ${transaction.transactionHash} confirmed at block ${transaction.blockNumber}`,
+          'Success'
+        )
+        this.pendingTransactions--
+      })
+      .catch((error: { code: number, message: string }) => {
+        switch (error.code) {
+          case 4001:
+            console.error('transaction rejected by client')
+            break
+          default:
+            if (this.pendingTransactions) {
+              this.pendingTransactions--
+            }
+            console.log('transaction error', error.message)
+        }
+      })
   }
+
   deploy() {
     this.counterService.deploy('0xD78ceA77cb890A5e6Eff2B4C31f24e61C27f9Baa')
   }

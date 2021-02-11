@@ -4,4 +4,11 @@
   <p align="center"><b>{{counterService.value$|async}}</b> have raised their hand for decentralization</p>
   <button id="increment-button"  mat-raised-button color="primary" (click)="inc()">Click here to raise your hand</button>
 </div>
+<div>
+
+</div>
+<div align="center" *ngIf="pendingTransactions">
+  confirming {{pendingTransactions}} transaction{{pendingTransactions>1?'s':''}}
+  <mat-progress-spinner mode="indeterminate" diameter="24"></mat-progress-spinner>
+</div>
 <!-- <button (click)="deploy()">deploy</button> -->

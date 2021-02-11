@@ -38,8 +38,6 @@ export class MetaversevmService {
 
   constructor() {
     this.init()
-
-    this.connected$.subscribe(console.log)
     this.accounts$.subscribe((accounts) => {
       this.selectedAccount$.next(accounts[0])
     })
