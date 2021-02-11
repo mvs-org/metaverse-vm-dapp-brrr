@@ -5,6 +5,21 @@ import { AbiItem } from 'web3-utils'
 import { Contract, } from 'web3-eth-contract'
 import { map } from 'rxjs/operators'
 
+
+export interface TransactionReceipt {
+  blockHash: string
+  blockNumber: number
+  contractAddress: string | null
+  cumulativeGasUsed: number
+  from: string
+  logsBloom: string
+  gasUsed: number
+  status: boolean
+  to: string
+  transactionHash: string
+  transactionIndex: number
+}
+
 declare let window: { metaversevm: any }
 
 @Injectable({
@@ -19,12 +34,13 @@ export class MetaversevmService {
 
   connected$ = this.accounts$.pipe(map(accounts => accounts.length > 0))
 
-  selectedAccount$ = new BehaviorSubject<string|undefined>(undefined)
+  selectedAccount$ = new BehaviorSubject<string | undefined>(undefined)
 
   constructor() {
     this.init()
+
     this.connected$.subscribe(console.log)
-    this.accounts$.subscribe((accounts)=>{
+    this.accounts$.subscribe((accounts) => {
       this.selectedAccount$.next(accounts[0])
     })
   }
@@ -32,7 +48,7 @@ export class MetaversevmService {
   async init() {
     if (window.metaversevm) {
       const provider = window.metaversevm
-      provider.on('accountsChanged', (accounts: string[])=>{
+      provider.on('accountsChanged', (accounts: string[]) => {
         this.accounts$.next(accounts)
       })
       this.web3 = new Web3(provider)
@@ -43,7 +59,7 @@ export class MetaversevmService {
   }
 
   async requestAccounts() {
-    if(this.web3===undefined){
+    if (this.web3 === undefined) {
       await this.init()
     }
     if (this.web3) {
