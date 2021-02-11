@@ -10,6 +10,8 @@ import { MatCardModule } from '@angular/material/card'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { CounterIndicatorComponent } from './components/counter-indicator/counter-indicator.component'
+import { MatIconModule } from '@angular/material/icon'
+
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { CounterIndicatorComponent } from './components/counter-indicator/counte
     MatSnackBarModule,
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
