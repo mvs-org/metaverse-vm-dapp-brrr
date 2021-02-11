@@ -52,7 +52,7 @@ export class CounterComponent implements OnInit {
       })
       .then((transaction: TransactionReceipt) => {
         this.snackbar.open(
-          `Transaction ${transaction.transactionHash} confirmed at block ${transaction.blockNumber}`,
+          `Transaction confirmed at block ${transaction.blockNumber}`,
           'Success'
         )
         this.pendingTransactions--
