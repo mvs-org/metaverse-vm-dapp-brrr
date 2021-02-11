@@ -48,14 +48,12 @@ export class CounterComponent implements OnInit {
       .on('transactionHash', (hash: string) => {
         console.log('transaction hash:', hash)
       })
-      .on('confirmation', ([blockNo]: [number]) => {
+
+      .on('receipt', (receipt: any) => {
         this.snackbar.open(
-          `Transaction confirmed at block ${blockNo}`,
+          `Transaction confirmed`,
           'Success'
         )
-        console.log('transaction confirmed at block', blockNo)
-      })
-      .on('receipt', function (receipt: any) {
         console.log('transaction receipt', receipt)
       })
   }
