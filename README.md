@@ -1,6 +1,6 @@
-# Metaverse Counter dApp
+# Metaverse Brrr dApp
 
-This dApp is an example for the interaction with the MetaverseVM browser extension and the Metaverse Blockchain smart contract virtual maching. It allows its users to connect to the browser extension, track the value of the counter contract and perform an increment function.
+This dApp is an example for the interaction with the MetaverseVM browser extension and the Metaverse Blockchain smart contract virtual maching. It allows its users to connect to the browser extension, track the total supply of the brrr token and print as many as they want using the print function.
 
 ## Install dependencies
 

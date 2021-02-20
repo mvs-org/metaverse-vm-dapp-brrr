@@ -1,25 +1,26 @@
 import { Component, OnInit } from '@angular/core'
 import { MatSnackBar } from '@angular/material/snack-bar'
-import { CounterService } from '../../services/counter.service'
+import { BrrrService } from '../../services/brrr.service'
 import { MetaversevmService, TransactionReceipt } from '../../services/metaversevm.service'
 
 @Component({
-  selector: 'app-counter',
-  templateUrl: './counter.component.html',
-  styleUrls: ['./counter.component.scss']
+  selector: 'app-brrr',
+  templateUrl: './brrr.component.html',
+  styleUrls: ['./brrr.component.scss']
 })
-export class CounterComponent implements OnInit {
+export class BrrrComponent implements OnInit {
 
   animateIndicator = false
   pendingTransactions = 0
+  totalSupply = 0
 
   constructor(
-    public counterService: CounterService,
+    public brrrService: BrrrService,
     public metaversevmService: MetaversevmService,
     private snackbar: MatSnackBar,
   ) {
-    this.counterService.value$.subscribe((value) => {
-      if (value) {
+    this.brrrService.totalSupply$.subscribe((totalSupply) => {
+      if (totalSupply) {
         this.animateIndicator = true
         setInterval(() => {
           this.animateIndicator = false
@@ -31,8 +32,8 @@ export class CounterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  inc() {
-    this.counterService.increment()
+  print() {
+    this.brrrService.print()
       .on('sent', () => {
         this.snackbar.open(
           `Transaction created. Please confirm on it on your browser extension.`,
@@ -56,6 +57,7 @@ export class CounterComponent implements OnInit {
           'Success'
         )
         this.pendingTransactions--
+        this.totalSupply++
       })
       .catch((error: { code: number, message: string }) => {
         switch (error.code) {
@@ -72,7 +74,7 @@ export class CounterComponent implements OnInit {
   }
 
   deploy() {
-    this.counterService.deploy('0xD78ceA77cb890A5e6Eff2B4C31f24e61C27f9Baa')
+    this.brrrService.deploy('0xD78ceA77cb890A5e6Eff2B4C31f24e61C27f9Baa')
   }
 
 }

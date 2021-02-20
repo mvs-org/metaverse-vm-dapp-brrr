@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/metaversevm-dapp-counter'),
+      dir: require('path').join(__dirname, './coverage/metaversevm-dapp-brrr'),
       subdir: '.',
       reporters: [
         { type: 'html' },

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CounterIndicatorComponent } from './counter-indicator.component';
+import { BrrrComponent } from './brrr.component';
 
-describe('CounterIndicatorComponent', () => {
-  let component: CounterIndicatorComponent;
-  let fixture: ComponentFixture<CounterIndicatorComponent>;
+describe('BrrrComponent', () => {
+  let component: BrrrComponent;
+  let fixture: ComponentFixture<BrrrComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CounterIndicatorComponent ]
+      declarations: [ BrrrComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CounterIndicatorComponent);
+    fixture = TestBed.createComponent(BrrrComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

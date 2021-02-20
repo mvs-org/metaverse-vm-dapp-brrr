@@ -7,7 +7,7 @@ import { MetaversevmService } from './services/metaversevm.service'
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'metaversevm-dapp-counter';
+  title = 'metaversevm-dapp-brrr';
 
   constructor(public metaversevmService: MetaversevmService){
   }

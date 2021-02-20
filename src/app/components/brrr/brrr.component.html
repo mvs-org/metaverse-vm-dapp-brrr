@@ -1,0 +1,15 @@
+<app-brrr-indicator [supply]="totalSupply"></app-brrr-indicator>
+
+<div *ngIf="(brrrService.totalSupply$|async)!==undefined">
+  <p align="center"><b>{{brrrService.totalSupply$|async}}</b> brrr have be printed</p>
+  <p align="center">You own <b>{{brrrService.balance$|async}}</b> brrr</p>
+  <button id="increment-button" mat-raised-button color="primary" (click)="print()">Click here to brrr</button>
+</div>
+<div>
+
+</div>
+<div align="center" *ngIf="pendingTransactions">
+  confirming {{pendingTransactions}} transaction{{pendingTransactions>1?'s':''}}
+  <mat-progress-spinner mode="indeterminate" diameter="24"></mat-progress-spinner>
+</div>
+<!-- <button (click)="deploy()">deploy</button> -->

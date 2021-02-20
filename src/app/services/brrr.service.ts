@@ -1,42 +1,47 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, interval, } from 'rxjs'
 import { MetaversevmService } from './metaversevm.service'
-const abi = require('../../assets/counter.abi.json')
+const abi = require('../../assets/brrr.abi.json')
 
 @Injectable({
   providedIn: 'root'
 })
-export class CounterService {
+export class BrrrService {
 
-  value$ = new BehaviorSubject<number | undefined>(undefined)
-  contractId = '0xdd943dd6cD425833a9B4935E88542684fFa9BA3E'
+  totalSupply$ = new BehaviorSubject<number | undefined>(undefined)
+  balance$ = new BehaviorSubject<number | undefined>(undefined)
+  contractId = '0x40Ef64282A61f7ae4d9a8E2D5a7C05E415B951D3'
 
   constructor(private metaversevmService: MetaversevmService) {
     interval(2000).subscribe(() => this.updateValue())
   }
 
   private async updateValue() {
-    console.log('update value')
     try {
       const contract = this.metaversevmService.getContract(
         abi,
         this.contractId,
       )
-      const value = await contract.methods.val().call()
-      if (value !== this.value$.value) {
-        this.value$.next(value)
+      console.log(contract.methods)
+      const totalSupply = await contract.methods.totalSupply().call()
+      if (totalSupply !== this.totalSupply$.value) {
+        this.totalSupply$.next(totalSupply)
+        const balance = await contract.methods.totalSupply().call()
+        if (balance !== this.balance$.value) {
+          this.balance$.next(balance)
+        }
       }
     } catch (error) { }
   }
 
-  increment() {
+  print() {
     const fromAddress = this.metaversevmService.selectedAccount$.value
     console.log({ fromAddress })
     const contract = this.metaversevmService.getContract(
       abi,
       this.contractId,
     )
-    return contract.methods.inc()
+    return contract.methods.print()
       .send({
         from: fromAddress,
       })
