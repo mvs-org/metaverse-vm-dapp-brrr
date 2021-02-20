@@ -8,14 +8,14 @@ import { Component, Input, } from '@angular/core'
 })
 export class BrrrIndicatorComponent {
 
-  @Input() supply: number = 0
+  @Input() supply: number | null | undefined
 
   video = document.getElementById("video1") as HTMLMediaElement
 
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.supply.previousValue!==undefined) {
+    if (changes.supply.previousValue !== undefined) {
       this.play()
     }
   }
