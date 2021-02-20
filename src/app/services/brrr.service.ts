@@ -8,6 +8,7 @@ const abi = require('../../assets/brrr.abi.json')
 })
 export class BrrrService {
 
+  decimals = 2
   totalSupply$ = new BehaviorSubject<number | undefined>(undefined)
   balance$ = new BehaviorSubject<number | undefined>(undefined)
   contractId = '0x40Ef64282A61f7ae4d9a8E2D5a7C05E415B951D3'
@@ -25,10 +26,10 @@ export class BrrrService {
       console.log(contract.methods)
       const totalSupply = await contract.methods.totalSupply().call()
       if (totalSupply !== this.totalSupply$.value) {
-        this.totalSupply$.next(totalSupply)
+        this.totalSupply$.next(totalSupply/10**this.decimals)
         const balance = await contract.methods.totalSupply().call()
         if (balance !== this.balance$.value) {
-          this.balance$.next(balance)
+          this.balance$.next(balance/10**this.decimals)
         }
       }
     } catch (error) { }
