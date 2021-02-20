@@ -12,7 +12,6 @@ export class BrrrComponent implements OnInit {
 
   animateIndicator = false
   pendingTransactions = 0
-  totalSupply = 0
 
   constructor(
     public brrrService: BrrrService,
@@ -57,7 +56,6 @@ export class BrrrComponent implements OnInit {
           'Success'
         )
         this.pendingTransactions--
-        this.totalSupply++
       })
       .catch((error: { code: number, message: string }) => {
         switch (error.code) {
