@@ -2,8 +2,8 @@
 
 <div *ngIf="(brrrService.totalSupply$|async)!==undefined">
   <p align="center"><b>{{brrrService.totalSupply$|async}}</b> brrr have be printed</p>
+  <button id="increment-button" mat-raised-button color="primary" (click)="print()">Click here to make the printer go brrr</button>
   <p align="center">You own <b>{{brrrService.balance$|async}}</b> brrr</p>
-  <button id="increment-button" mat-raised-button color="primary" (click)="print()">Click here to brrr</button>
 </div>
 <div>
 
