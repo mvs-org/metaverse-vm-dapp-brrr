@@ -23,7 +23,6 @@ export class BrrrService {
         abi,
         this.contractId,
       )
-      console.log(contract.methods)
       const totalSupply = await contract.methods.totalSupply().call()
       if (totalSupply !== this.totalSupply$.value) {
         this.totalSupply$.next(totalSupply/10**this.decimals)
@@ -37,7 +36,6 @@ export class BrrrService {
 
   print() {
     const fromAddress = this.metaversevmService.selectedAccount$.value
-    console.log({ fromAddress })
     const contract = this.metaversevmService.getContract(
       abi,
       this.contractId,
