@@ -1,5 +1,5 @@
-import { SimpleChanges } from '@angular/core';
-import { Component, Input, } from '@angular/core';
+import { SimpleChanges } from '@angular/core'
+import { Component, Input, } from '@angular/core'
 
 @Component({
   selector: 'app-brrr-indicator',
@@ -15,12 +15,14 @@ export class BrrrIndicatorComponent {
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.play()
+    if (changes.supply.previousValue!==undefined) {
+      this.play()
+    }
   }
 
   play() {
     this.video = document.getElementById("video1") as HTMLMediaElement
-    this.video.play();
+    this.video.play()
   }
 
 }
