@@ -73,8 +73,4 @@ export class BrrrComponent implements OnInit {
       })
   }
 
-  deploy() {
-    this.brrrService.deploy('0xD78ceA77cb890A5e6Eff2B4C31f24e61C27f9Baa')
-  }
-
 }
