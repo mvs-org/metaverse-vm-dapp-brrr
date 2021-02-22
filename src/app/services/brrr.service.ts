@@ -26,7 +26,7 @@ export class BrrrService {
       const totalSupply = await contract.methods.totalSupply().call()
       if (totalSupply !== this.totalSupply$.value) {
         this.totalSupply$.next(totalSupply/10**this.decimals)
-        const balance = await contract.methods.totalSupply().call()
+        const balance = await contract.methods.balanceOf(this.metaversevmService.selectedAccount$.value).call()
         if (balance !== this.balance$.value) {
           this.balance$.next(balance/10**this.decimals)
         }
