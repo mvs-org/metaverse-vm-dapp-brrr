@@ -1,14 +1,30 @@
-<app-brrr-indicator [supply]="brrrService.totalSupply$|async"></app-brrr-indicator>
+<div *ngIf="metaversevmService.connectedToNetwork$|async; else incorrectNetwork">
 
-<div *ngIf="(brrrService.totalSupply$|async)!==undefined">
-  <p align="center"><b>{{brrrService.totalSupply$|async}}</b> brrr have been printed</p>
-  <button id="increment-button" mat-raised-button color="primary" (click)="print()">Click here to make the printer go brrr</button>
-  <p align="center">You own <b>{{brrrService.balance$|async}}</b> brrr</p>
-</div>
-<div>
 
+  <app-brrr-indicator [supply]="brrrService.totalSupply$|async"></app-brrr-indicator>
+
+  <div *ngIf="(brrrService.totalSupply$|async)!==undefined">
+    <p align="center"><b>{{brrrService.totalSupply$|async}}</b> brrr have been printed</p>
+    <button id="increment-button" mat-raised-button color="primary" (click)="print()">Click here to make the printer go brrr</button>
+    <p align="center">You own <b>{{brrrService.balance$|async}}</b> brrr</p>
+  </div>
+  <div>
+
+  </div>
+  <div align="center" *ngIf="pendingTransactions">
+    confirming {{pendingTransactions}} transaction{{pendingTransactions>1?'s':''}}
+    <mat-progress-spinner mode="indeterminate" diameter="24"></mat-progress-spinner>
+  </div>
 </div>
-<div align="center" *ngIf="pendingTransactions">
-  confirming {{pendingTransactions}} transaction{{pendingTransactions>1?'s':''}}
-  <mat-progress-spinner mode="indeterminate" diameter="24"></mat-progress-spinner>
-</div>
+<ng-template #incorrectNetwork>
+  <mat-card class="error-message-card">
+    <p>You are not connected to the Metaverse Hyperspace network.</p>
+    <p>
+      RPC URL: https://vm.mvs.org/mainnet_rpc/<br>
+      Chain ID: 23
+    </p>
+    <p>You can find a guide on how to connect to it on <a
+      href="https://learn.mvs.org">https://learn.mvs.org</a></p>
+  </mat-card>
+
+</ng-template>

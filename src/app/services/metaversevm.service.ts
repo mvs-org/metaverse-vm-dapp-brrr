@@ -20,7 +20,7 @@ export interface TransactionReceipt {
   transactionIndex: number
 }
 
-declare let window: { metaversevm: any }
+declare let window: { ethereum: any }
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +36,9 @@ export class MetaversevmService {
 
   selectedAccount$ = new BehaviorSubject<string | undefined>(undefined)
 
+  supportedNetwork = 23
+  connectedToNetwork$ = new BehaviorSubject<boolean>(false)
+
   constructor() {
     this.init()
     this.accounts$.subscribe((accounts) => {
@@ -44,12 +47,17 @@ export class MetaversevmService {
   }
 
   async init() {
-    if (window.metaversevm) {
-      const provider = window.metaversevm
+    if (window.ethereum) {
+      const provider = window.ethereum
       provider.on('accountsChanged', (accounts: string[]) => {
         this.accounts$.next(accounts)
       })
+      provider.on('networkChanged', (network: any) => {
+          this.connectedToNetwork$.next(parseInt(network)===this.supportedNetwork)
+      })
       this.web3 = new Web3(provider)
+
+      this.connectedToNetwork$.next((await this.web3?.eth.getChainId())===this.supportedNetwork)
       this.accounts$.next(await this.web3.eth.getAccounts())
     } else {
       throw Error('ERR_METAVERSEVM_NOT_AVAILABLE')

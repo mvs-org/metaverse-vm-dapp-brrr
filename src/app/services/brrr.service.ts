@@ -11,7 +11,7 @@ export class BrrrService {
   decimals = 2
   totalSupply$ = new BehaviorSubject<number | undefined>(undefined)
   balance$ = new BehaviorSubject<number | undefined>(undefined)
-  contractId = '0x40Ef64282A61f7ae4d9a8E2D5a7C05E415B951D3'
+  contractId = '0x03d7BD04B6fd597AeFd6FD7A5bbA645430F907D8'
 
   constructor(private metaversevmService: MetaversevmService) {
     interval(2000).subscribe(() => this.updateValue())
@@ -36,6 +36,7 @@ export class BrrrService {
 
   print() {
     const fromAddress = this.metaversevmService.selectedAccount$.value
+    console.log({fromAddress})
     const contract = this.metaversevmService.getContract(
       abi,
       this.contractId,
