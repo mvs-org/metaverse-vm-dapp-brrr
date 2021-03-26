@@ -1,16 +1,14 @@
 <div *ngIf="metaversevmService.connected$|async; else connectButton">
   <p>
-    The Metaverse Brrr dApp is connected to your browser extension
+    The Metaverse Brrr dApp is connected to your browser wallet
   </p>
 </div>
 <ng-template #connectButton>
   <p>
-    <mat-card>
-      Please connect to your MetaverseVM browser extension. You can download the latest version from your browsers
-      extension store as well as from <a
-        href="https://github.com/mvs-org/metaverse-vm-extension/releases">https://github.com/mvs-org/metaverse-vm-extension/releases</a>
+    <mat-card class="error-message-card">
+      Please connect to your Browser Wallet. For further information please visit <a
+        href="https://learn.mvs.org">https://learn.mvs.org</a>
     </mat-card>
-
   </p>
-  <button id="connect-button" mat-raised-button color="warn" (click)="connect()">Connect to MetaverseVM Extension</button>
+  <button id="connect-button" mat-raised-button color="warn" (click)="connect()">Connect to Browser Wallet</button>
 </ng-template>
