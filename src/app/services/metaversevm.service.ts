@@ -20,7 +20,7 @@ export interface TransactionReceipt {
   transactionIndex: number
 }
 
-declare let window: { ethereum: any }
+declare let window: { metaversevm: any }
 
 @Injectable({
   providedIn: 'root'
@@ -47,8 +47,8 @@ export class MetaversevmService {
   }
 
   async init() {
-    if (window.ethereum) {
-      const provider = window.ethereum
+    if (window.metaversevm) {
+      const provider = window.metaversevm
       provider.on('accountsChanged', (accounts: string[]) => {
         this.accounts$.next(accounts)
       })
@@ -78,6 +78,13 @@ export class MetaversevmService {
       throw Error('ERR_WEB3_UNAVAILABLE')
     }
     return new this.web3.eth.Contract(abi, contractId, { data: bytecode })
+  }
+
+  async estimateGas(transactionConfig: any){
+    if (!this.web3) {
+      throw Error('ERR_WEB3_UNAVAILABLE')
+    }
+    return this.web3.eth.estimateGas(transactionConfig)
   }
 
   async deployContract(fromAddress: string, args: any[], abi: AbiItem | AbiItem[], bytecode: string, etpValue: number = 0) {
